@@ -9,7 +9,7 @@ Inspired by:
 Installation
 =====
     
-    composer require <mypackage>
+    composer require charles-rumley/php-po-to-json
 
 Usage
 =====

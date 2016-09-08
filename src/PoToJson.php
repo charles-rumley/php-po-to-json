@@ -104,8 +104,6 @@ class PoToJson
                 isset($t["msgstr[1]"]) ? ($entry[2] = $t["msgstr[1]"][0]) : null;
                 isset($t["msgstr[2]"]) ? ($entry[3] = $t["msgstr[2]"][0]) : null;
             } else {
-                // I think Ty removed the first null entry when creating Jed files,
-                // but I'm not sure why because the test fixtures seem to indicate it's valid
                 $entry[0] = null;
                 $entry[1] = implode("", $t["msgstr"]);
             }
@@ -138,6 +136,24 @@ class PoToJson
             "domain" => $domain,
             "locale_data" => [],
         ];
+
+        // Jed 1.x compatibility
+        // todo refactor this out to allow Jed < 1.x compatibility
+        $translations = array_map(
+            function ($translation) {
+                if (!empty($translation)) {
+                    for ($i = 2; $i < count($translation); $i++) {
+                        if (isset($translation[$i]) && empty($translation[$i])) {
+                            $translation[$i] = $translation[0];
+                        }
+                    }
+                    array_shift($translation);
+                }
+
+                return $translation;
+            },
+            $translations
+        );
         $jedCompatibleTranslations["locale_data"][$domain] = $translations;
         $jedCompatibleTranslations["locale_data"][$domain][""] = [
             "domain" => $domain,

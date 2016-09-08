@@ -1,0 +1,32 @@
+{
+    "name": "charles-rumley/php-po-to-json",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charles Rumley",
+            "email": "charles.rumley@gmail.com"
+        }
+    ],
+    "description": "",
+    "keywords": [
+        "translation",
+        "i18n",
+        "php",
+        "json",
+        "jed"
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "sepia/po-parser": "^4.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CharlesRumley\\": "src/",
+            "CharlesRumley\\Tests\\": "tests/"
+        }
+    }
+}
